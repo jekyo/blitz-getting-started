@@ -1,173 +1,152 @@
-[![Blitz.js](https://raw.githubusercontent.com/blitz-js/art/master/github-cover-photo.png)](https://blitzjs.com)
+# Tutorial: Deploying a basic Blitz app on Jekyo
 
-This is a [Blitz.js](https://github.com/blitz-js/blitz) app.
+Demo app [here](https://blitz-demo.jekyo.app/)
 
-# **blitz-demo2**
+### Prerequisites
 
-## Getting Started
+Make sure you have [NodeJS](https://nodejs.org/en/download/), [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) and [git](https://github.com/git-guides/install-git) installed.
 
-Run your app in the development mode.
+If it's your first time using **Jekyo**, you can **install** it by running the following command in your terminal:
 
-```
-blitz dev
-```
+`npm install -g jekyo`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Sign in to Jekyo
 
-## Environment Variables
-
-Ensure the `.env.local` file has required environment variables:
+You can sign in to Jekyo by running `jekyo user:signin`
 
 ```
-DATABASE_URL=postgresql://<YOUR_DB_USERNAME>@localhost:5432/blitz-demo2
+➜  ~ jekyo user:signin
+Your email?: **************
+Your password?: **********
+You have successfully signed in!
 ```
 
-Ensure the `.env.test.local` file has required environment variables:
+If you don't have a Jekyo account, you can create one in the terminal by running `jekyo user:signup`.
+
+## 1. Create a basic Blitz app
+
+You can start your Blitz project by using `jekyo create`
+
+Using the **arrows** on your keyboard, select **blitz** and press **enter**.
 
 ```
-DATABASE_URL=postgresql://<YOUR_DB_USERNAME>@localhost:5432/blitz-demo2_test
+? Select template
+  None Creates only the application
+  expressjs A basic app skeleton using [Express](https://expressjs.com/)
+  nuxt-js A boilerplate SSR application using [Nuxt.js](https://nuxtjs.org/)
+❯ blitz A basic starter app using [Blitz](https://blitzjs.com/)
 ```
 
-## Tests
+When prompted, enter the desired name for your Blitz app.
 
-Runs your tests using Jest.
+`Application name?: blitz-tutorial`
 
-```
-yarn test
-```
-
-Blitz comes with a test setup using [Jest](https://jestjs.io/) and [react-testing-library](https://testing-library.com/).
-
-## Commands
-
-Blitz comes with a powerful CLI that is designed to make development easy and fast. You can install it with `npm i -g blitz`
+This will create a basic Blitz app in the current directory by cloning this [Blitz starter app](https://github.com/jekyo/blitz-getting-started) repository.
 
 ```
-  blitz [COMMAND]
-
-  dev       Start a development server
-  build     Create a production build
-  start     Start a production server
-  export    Export your Blitz app as a static application
-  prisma    Run prisma commands
-  generate  Generate new files for your Blitz project
-  console   Run the Blitz console REPL
-  install   Install a recipe
-  help      Display help for blitz
-  test      Run project tests
+Cloning source code... OK
+Application created!
 ```
 
-You can read more about it on the [CLI Overview](https://blitzjs.com/docs/cli-overview) documentation.
+### Deploy the Blitz app on Jekyo
 
-## What's included?
+To deploy the app, first navigate to the newly created directory:
 
-Here is the starting structure of your app.
+`cd blitz-tutorial`
+
+Now you can deploy this app to Jekyo by running:
+
+`jekyo deploy`
+
+After a while, you should see something like this:
 
 ```
-blitz-demo2
-├── app/
-│   ├── api/
-│   ├── auth/
-│   │   ├── components/
-│   │   │   ├── LoginForm.tsx
-│   │   │   └── SignupForm.tsx
-│   │   ├── mutations/
-│   │   │   ├── changePassword.ts
-│   │   │   ├── forgotPassword.test.ts
-│   │   │   ├── forgotPassword.ts
-│   │   │   ├── login.ts
-│   │   │   ├── logout.ts
-│   │   │   ├── resetPassword.test.ts
-│   │   │   ├── resetPassword.ts
-│   │   │   └── signup.ts
-│   │   ├── pages/
-│   │   │   ├── forgot-password.tsx
-│   │   │   ├── login.tsx
-│   │   │   ├── reset-password.tsx
-│   │   │   └── signup.tsx
-│   │   └── validations.ts
-│   ├── core/
-│   │   ├── components/
-│   │   │   ├── Form.tsx
-│   │   │   └── LabeledTextField.tsx
-│   │   ├── hooks/
-│   │   │   └── useCurrentUser.ts
-│   │   └── layouts/
-│   │       └── Layout.tsx
-│   ├── pages/
-│   │   ├── 404.tsx
-│   │   ├── _app.tsx
-│   │   ├── _document.tsx
-│   │   ├── index.test.tsx
-│   │   └── index.tsx
-│   └── users/
-│       └── queries/
-│           └── getCurrentUser.ts
-├── db/
-│   ├── index.ts
-│   ├── schema.prisma
-│   └── seeds.ts
-├── integrations/
-├── mailers/
-│   └── forgotPasswordMailer.ts
-├── public/
-│   ├── favicon.ico*
-│   └── logo.png
-├── test/
-│   ├── setup.ts
-│   └── utils.tsx
-├── README.md
-├── babel.config.js
-├── blitz.config.js
-├── jest.config.js
-├── package.json
-├── tsconfig.json
-├── types.d.ts
-├── types.ts
-└── yarn.lock
+➜  Fetching source code ... OK
+➜  Building application, this might take a while ... OK
+➜  Publishing application, this might take a while  ... OK
+➜  Deploying application ... OK
+➜  Waiting for application to start ... OK
+➜  Visit your app on: https://blitz-tutorial.jekyo.app ... OK
 ```
 
-These files are:
+You can now browse to your Blitz app on https://blitz-tutorial.jekyo.app (replace 'blitz-tutorial' with your app name)
 
-- The `app/` folder is a container for most of your project. This is where you’ll put any pages or API routes.
+## 2. Deploying an existing Blitz app
 
-- `db/` is where your database configuration goes. If you’re writing models or checking migrations, this is where to go.
+Navigate to your local Blitz app directory
 
-- `public/` is a folder where you will put any static assets. If you have images, files, or videos which you want to use in your app, this is where to put them.
+`cd my-blitz-app`
 
-- `integrations/` is a folder to put all third-party integrations like with Stripe, Sentry, etc.
+Initialize a git repository if you haven't already done so by running `git init`.
 
-- `test/` is a folder where you can put test utilities and integration tests.
+### Edit package.json
 
-- `package.json` contains information about your dependencies and devDependencies. If you’re using a tool like `npm` or `yarn`, you won’t have to worry about this much.
+In your `"scripts"` section of your **package.json**, your `"start"` line should include Jekyo's `$PORT` and `$HOST` variables:
 
-- `tsconfig.json` is our recommended setup for TypeScript.
+```
+"start": "blitz start --port=$PORT --hostname=$HOST",
+```
 
-- `.babelrc.js`, `.env`, etc. ("dotfiles") are configuration files for various bits of JavaScript tooling.
+### Edit .env
 
-- `blitz.config.js` is for advanced custom configuration of Blitz. It extends [`next.config.js`](https://nextjs.org/docs/api-reference/next.config.js/introduction).
+In the root directory of your app, your **.env** file (not .env.local) should include the db URL and a session secret key that's at least 32 characters long:
 
-- `jest.config.js` contains config for Jest tests. You can [customize it if needed](https://jestjs.io/docs/en/configuration).
+```
+DATABASE_URL="file:./db.sqlite"
+SESSION_SECRET_KEY="this-is-a-33-char-long-secret-key"
+```
 
-You can read more about it in the [File Structure](https://blitzjs.com/docs/file-structure) section of the documentation.
+### Create an empty Jekyo app:
 
-### Tools included
+`jekyo create`
 
-Blitz comes with a set of tools that corrects and formats your code, facilitating its future maintenance. You can modify their options and even uninstall them.
+Select 'none' using the **arrows** on your keyboard and press **enter**. This will create an app using your current directory.
 
-- **ESLint**: It lints your code: searches for bad practices and tell you about it. You can customize it via the `.eslintrc.js`, and you can install (or even write) plugins to have it the way you like it. It already comes with the [`blitz`](https://github.com/blitz-js/blitz/tree/canary/packages/eslint-config) config, but you can remove it safely. [Learn More](https://eslint.org).
-- **Husky**: It adds [githooks](https://git-scm.com/docs/githooks), little pieces of code that get executed when certain Git events are triggerd. For example, `pre-commit` is triggered just before a commit is created. You can see the current hooks inside `.husky/`. If are having problems commiting and pushing, check out ther [troubleshooting](https://typicode.github.io/husky/#/?id=troubleshoot) guide. [Learn More](https://typicode.github.io/husky).
-- **Prettier**: It formats your code to look the same everywhere. You can configure it via the `.prettierrc` file. The `.prettierignore` contains the files that should be ignored by Prettier; useful when you have large files or when you want to keep a custom formatting. [Learn More](https://prettier.io).
+```
+? Select template (Use arrow keys)
+❯ None Creates an application from your current directory
+```
 
-## Learn more
+Name your app:
 
-Read the [Blitz.js Documentation](https://blitzjs.com/docs/getting-started) to learn more.
+`Application name?: my-blitz-app`
 
-The Blitz community is warm, safe, diverse, inclusive, and fun! Feel free to reach out to us in any of our communication channels.
+Run `jekyo link` to link your local app to the remote Jekyo app. Select 'my-blitz-app' using the **arrows** on your keyboard and press **enter**.
 
-- [Website](https://blitzjs.com/)
-- [Discord](https://discord.blitzjs.com/)
-- [Report an issue](https://github.com/blitz-js/blitz/issues/new/choose)
-- [Forum discussions](https://github.com/blitz-js/blitz/discussions)
-- [How to Contribute](https://blitzjs.com/docs/contributing)
-- [Sponsor or donate](https://github.com/blitz-js/blitz#sponsors-and-donations)
+```
+? Select application (Use arrow keys)
+❯ my-blitz-app
+```
+
+### Now you can deploy this app to Jekyo by running:
+
+`jekyo deploy`
+
+After a while, you should see something like this:
+
+```
+➜  Fetching source code ... OK
+➜  Building application, this might take a while ... OK
+➜  Publishing application, this might take a while  ... OK
+➜  Deploying application ... OK
+➜  Waiting for application to start ... OK
+➜  Visit your app on: https://my-blitz-app.jekyo.app ... OK
+```
+
+You can now browse to your Blitz app on https://my-blitz-app.jekyo.app (replace 'my-blitz-app' with your app name)
+
+## Pushing local changes to Jekyo
+
+Add the newly modified file(s) to the git index by using [git add](https://www.atlassian.com/git/tutorials/saving-changes)
+
+`git add filename`
+
+Create a [git commit](https://github.com/git-guides/git-commit)
+
+`git commit -m "your commit message"`
+
+Now, simply deploy your app again:
+
+`jekyo deploy`
+
+You will see your changes on your live app after a short while.
