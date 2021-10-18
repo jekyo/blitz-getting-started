@@ -2,9 +2,9 @@
   "name": "blitz-demo2",
   "version": "1.0.0",
   "scripts": {
-    "dev": "blitz dev",
+    "dev": "blitz dev --port=4139 --hostname=0.0.0.0",
     "build": "blitz build",
-    "start": "blitz start",
+    "start": "blitz start --port=$PORT --hostname=$HOST",
     "studio": "blitz prisma studio",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
     "test": "jest",
